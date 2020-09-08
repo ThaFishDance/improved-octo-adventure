@@ -1,0 +1,34 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+    <title>Weather App</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="heading">
+        <h1>What is the weather like right now?</h1>
+      </div>
+      <form method="POST">
+        <input type="text" name="city" id="city" placeholder="Enter City..." />
+        <button>Find</button>
+      </form>
+      <!-- <p>City: London</p> -->
+      <div class="fields">
+        {% if mainData and city %}
+        <p>City: {{ city }}</p>
+        <p>Temperature: {{ mainData['temp'] }}</p>
+        <p>Feels like: {{ mainData['feels_like'] }}</p>
+        {% endif %} {% with messages = get_flashed_messages() %} {% if messages
+        %}
+        <ul class="flashes">
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+      </div>
+    </div>
+  </body>
+</html>
